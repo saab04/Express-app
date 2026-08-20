@@ -121,7 +121,19 @@ footer {
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 20px;
     height: 100%;
+}
+
+#name-display > i {
+    width: 32px;
+    height: 32px;
+    color: var(--white);
+}
+
+#name-display > p{
+    font-size: 20px;
+    color: var(--white);
 }
 
 #name-display > button {

@@ -19,6 +19,7 @@ logOutButton.addEventListener("click", async e => {
     }
 });
 
+const nameDisplay = document.getElementById("name-display");
 
 
 async function checkUserSession() {
@@ -38,6 +39,11 @@ async function checkUserSession() {
 
         if(data.loggedIn) {
             console.log("Logged in as:", data.username);
+
+            const nameText = document.createElement("p");
+            nameText.textContent = data.username;
+            nameDisplay.prepend(nameText);
+
         }
 
     } catch (error) {
@@ -45,3 +51,5 @@ async function checkUserSession() {
 
     }
 }
+
+checkUserSession();
