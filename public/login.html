@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
     <link rel="stylesheet" href="/css/global.css">
     <title>Login</title>
 </head>
@@ -10,10 +11,14 @@
     <header ></header>
     <main>
         <form id="login-form" class="form">
-            <h2></h2>
-
+            <h2>Log in</h2>
+            <input type="text" id="name" name="name" placeholder="Name">
+            <input type="password" id="password" name="password" placeholder="Password">
+            <button type="submit">Log in</button>
+            <p>No account?   <a href="/auth/signup">Sign up here</a></p>
         </form>
     </main>    
     <footer></footer>
+    <script src="/js/login.js"></script>
 </body>
 </html>

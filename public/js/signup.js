@@ -1,5 +1,3 @@
-const API_URL = "http://localhost:3000";
-
 const nameInput = document.getElementById("name");
 const emailInput = document.getElementById("email");
 const passwordInput = document.getElementById("password");
@@ -15,12 +13,12 @@ signUpButton.addEventListener("click", async e => {
     const confirmedPassword = confirmPasswordInput.value.trim();
 
     if(!username || !email || !password || !confirmedPassword) {
-        console.log("Empty input fields");
+        console.log("Empty input field / fields");
         return;
     }
 
     try {
-        const response = await fetch("http://localhost:3000/auth/signup", {
+        const response = await fetch("/auth/signup", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -40,9 +38,9 @@ signUpButton.addEventListener("click", async e => {
         confirmedPassword.value = "";
         
         console.log("User signed up:", data);
-        window.location.href = "/dashboard"; 
+        window.location.replace("/dashboard");
 
     } catch (error) {
-        console.error("Error:", error.message)
+        console.error("Error:", error.message);
     }
-})
+});

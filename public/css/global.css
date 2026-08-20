@@ -28,9 +28,11 @@ body {
                          "footer footer footer";
     font-family: var(--main-font);
     user-select: none;
+    color: var(--main-text-color);
 }
 
 header {
+    position: relative;
     grid-area: header;
     background: var(--hf-color);
 }
@@ -58,24 +60,19 @@ footer {
     justify-content: center;
     align-items: center;
     gap: 1lh;
-}
-
-/* register */
-
-#sign-up-form {
     background: var(--white);
     border-radius: var(--cards-br);
-    padding-bottom: 2lh;
+    padding-bottom: 1.5lh;
 }
 
-#sign-up-form > h2{
+.form > h2{
     height: 2lh;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-#sign-up-form > input {
+.form > input {
     width: calc(80% - 20px);
     height: 2lh;
     padding: 0 10px;
@@ -84,7 +81,7 @@ footer {
     border: 0.5px solid var(--border-color);
 }
 
-#sign-up-form > button {
+.form > button {
     width: 50%;
     min-width: 100px;
     height: 2lh;
@@ -97,10 +94,60 @@ footer {
     cursor: pointer;
 }
 
-#sign-up-form > button:hover {
+.form > button:hover {
     background: var(--buttons-hover);
 }
 
-#sign-up-form > button:hover:active {
-    scale: 0.95;
+.form > button:hover:active {
+    scale: 0.97;
 }
+
+.form > p > a {
+    text-decoration: none;
+    transition: var(--transition-buttons);
+    color: var(--buttons);
+}
+
+.form > p > a:hover {
+    text-decoration: underline;
+}
+
+/* dashboard */ 
+
+#name-display {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+#name-display > button {
+    width: 100px;
+    margin-right: 10px;
+    height: 2lh;
+    font-size: 18px;
+    border-radius: var(--cards-br);
+    border: none;
+    background-color: var(--buttons);
+    color: var(--white);
+    transform: var(--transition-buttons);
+    cursor: pointer;
+}
+
+#name-display > button:hover {
+    background: var(--buttons-hover);
+}
+
+#name-display > button:hover:active {
+    scale: 0.97;
+}
+
+
+
+
+
+
+
