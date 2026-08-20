@@ -1,9 +1,16 @@
 :root {
     --hf-color: #374955;
-    --main-text-color: #9baebc;
-    --main-bg-color: #edfbff;
-    --buttons: #8bd3ff;
-    --buttons-hover: #6cc2ff;
+    --main-text-color: #1A2229;
+    --main-bg-color: #F0F4F8;
+    --buttons: #0284C7;
+    --buttons-hover: #0369A1;
+    --border-color: #8A9BA8;
+    --white: white;
+
+    --input-br: 8px;
+    --cards-br: 20px;
+    --main-font: cursive;
+    --transition-buttons: all 0.1s ease;
 }
 
 * {
@@ -19,6 +26,8 @@ body {
     grid-template-areas: "header header header"
                          "main main main"
                          "footer footer footer";
+    font-family: var(--main-font);
+    user-select: none;
 }
 
 header {
@@ -28,10 +37,70 @@ header {
 
 main {
     grid-area: main;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background: var(--main-bg-color);
 }
 
 footer {
     grid-area: footer;
     background: var(--hf-color);
+}
+
+/* register and login */
+
+.form {
+    position: relative;
+    width: clamp(300px, 450px, 85dvw);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1lh;
+}
+
+/* register */
+
+#sign-up-form {
+    background: var(--white);
+    border-radius: var(--cards-br);
+    padding-bottom: 2lh;
+}
+
+#sign-up-form > h2{
+    height: 2lh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#sign-up-form > input {
+    width: calc(80% - 20px);
+    height: 2lh;
+    padding: 0 10px;
+    font-size: 18px;
+    border-radius: var(--input-br);
+    border: 0.5px solid var(--border-color);
+}
+
+#sign-up-form > button {
+    width: 50%;
+    min-width: 100px;
+    height: 2lh;
+    font-size: 18px;
+    border-radius: 20px;
+    border: none;
+    color: var(--white);
+    background: var(--buttons);
+    transition: var(--transition-buttons);
+    cursor: pointer;
+}
+
+#sign-up-form > button:hover {
+    background: var(--buttons-hover);
+}
+
+#sign-up-form > button:hover:active {
+    scale: 0.95;
 }
