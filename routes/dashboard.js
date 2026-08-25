@@ -1,5 +1,6 @@
 import express from "express";
-import { __filename, __dirname, verifyJWT } from "../server.js";
+import { __filename, __dirname} from "../server.js";
+import { verifyJWT } from "../middleware/authMiddleware.js";
 import path from "path";
 
 const router = express.Router();

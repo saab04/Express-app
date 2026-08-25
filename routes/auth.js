@@ -1,5 +1,6 @@
 import express from "express";
 import { __filename, __dirname } from "../server.js";
+import { redirectIfLoggedIn } from "../middleware/authMiddleware.js";
 import path from "path"
 import { signUpUser, loginUser, logoutUser, checkAuthStatus } from "../controllers/authController.js";
 
@@ -10,11 +11,11 @@ router.get("/", (req, res) => {
     res.redirect("/auth/login");
 })
 
-router.get("/signup", (req, res) => {
+router.get("/signup", redirectIfLoggedIn, (req, res) => {
     res.sendFile(path.join(__dirname, "./public", "signup.html"));
 });
 
-router.get("/login", (req, res) => {
+router.get("/login", redirectIfLoggedIn, (req, res) => {
     res.sendFile(path.join(__dirname, "./public", "login.html"));
 });
 

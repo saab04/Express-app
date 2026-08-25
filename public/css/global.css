@@ -9,7 +9,7 @@
 
     --input-br: 8px;
     --cards-br: 20px;
-    --main-font: cursive;
+    --main-font: "Trebuchet MS", "Lucida Grande", "Lucida Sans Unicode", sans-serif;
     --transition-buttons: all 0.1s ease;
 }
 
@@ -48,6 +48,10 @@ main {
 footer {
     grid-area: footer;
     background: var(--hf-color);
+}
+
+button, input, select { 
+    font-family: inherit; 
 }
 
 /* register and login */
