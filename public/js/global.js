@@ -53,3 +53,5 @@ async function checkUserSession() {
 }
 
 checkUserSession();
+
+lucide.createIcons();
