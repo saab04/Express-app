@@ -38,6 +38,7 @@ header {
 }
 
 main {
+    position: relative;
     grid-area: main;
     display: flex;
     justify-content: center;
@@ -160,6 +161,68 @@ button, input, select {
 #name-display > button:hover:active {
     scale: 0.97;
 }
+
+#balance-display {
+    position: absolute;
+    top: 10px;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    gap: 10px;
+    width: clamp(200px, 300px, 85dvw);
+}
+
+.opacity-0 {
+  opacity: 0 !important;
+  pointer-events: none;
+}
+
+#balance-display > div { 
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+}
+
+#timer-con {
+    flex-direction: column;
+}
+
+#cooldown-timer {
+    color: var(--buttons);
+}
+
+#balance-display > button {
+    width: 70%;
+    height: 2lh;
+    font-size: 18px;
+    border-radius: var(--cards-br);
+    border: none;
+    color: var(--white);
+    background: var(--buttons);
+    cursor: pointer;
+}
+
+#balance-display > button:hover {
+    background: var(--buttons-hover);
+}
+
+#balance-display > button:active {
+    scale: 0.97;
+}
+
+#balance-display > button:disabled {
+    background: #e0e0e0; 
+    color: #a0a0a0;     
+    cursor: not-allowed;
+}
+
+
+
+
+
+
 
 
 
