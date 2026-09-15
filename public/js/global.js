@@ -25,9 +25,6 @@ async function checkUserSession() {
     try {
         const response = await fetch("/auth/user", {
             method: "GET",
-            headers: {
-                "Content-Type": "application/json"
-            }
         });
 
         const data = await response.json();
@@ -57,9 +54,6 @@ async function getRewardInfo() {
     try {
         const response = await fetch("/dashboard/reward-info", {
             method: "GET",
-            headers: {
-                "Content-Type": "application/json"
-            }
         });
 
         const data = await response.json();

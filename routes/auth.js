@@ -12,11 +12,11 @@ router.get("/", (req, res) => {
 })
 
 router.get("/signup", redirectIfLoggedIn, (req, res) => {
-    res.sendFile(path.join(__dirname, "./public", "signup.html"));
+    res.render("signup", {title: "Sign up"})
 });
 
 router.get("/login", redirectIfLoggedIn, (req, res) => {
-    res.sendFile(path.join(__dirname, "./public", "login.html"));
+    res.render("login", {title: "Login"});
 });
 
 router.get("/user", checkAuthStatus);

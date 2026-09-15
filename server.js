@@ -3,9 +3,10 @@ import cors from "cors";
 import path from "path"
 import { fileURLToPath } from "url";
 import "dotenv/config";
-import jwt from "jsonwebtoken";
 import cookieparser from "cookie-parser";
 import mongoose from "mongoose";
+import compression from "compression";
+import hbs from "hbs";
 
 import authRouter from "./routes/auth.js";
 import dashboardRouter from "./routes/dashboard.js";
@@ -20,9 +21,26 @@ mongoose.connect(process.env.MONGODB_URI).then(console.log("Connected to databas
 
 app.use(cookieparser());
 app.use(express.json());
-app.use(cors({
-    credentials: true
-}));
+app.use(cors({credentials: true}));
+app.use(compression());
+
+app.set("view engine", "hbs");
+app.set("views", path.join(__dirname, "views"));
+hbs.registerPartials(path.join(__dirname, "views", "partials"));
+
+hbs.registerHelper("block", function(name, options) {
+    if (!this._blocks) this._blocks = {};
+    if (!this._blocks[name]) this._blocks[name] = [];
+    this._blocks[name].push(options.fn(this));
+    return null;
+});
+
+hbs.registerHelper("extend", function(name) {
+    const blocks = this._blocks || {};
+    const content = blocks[name] || [];
+    return content.join("\n");
+});
+
 app.use(express.static(path.join(__dirname, "public")));
 
 // routes

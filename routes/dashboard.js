@@ -7,7 +7,7 @@ import path from "path";
 const router = express.Router();
 
 router.get("/", verifyJWT, (req, res) => {
-    res.sendFile(path.join(__dirname, "./private", "dashboard.html"));
+    res.render("dashboard", {title: "Home", user: req.user})
 });
 
 router.get("/reward-info", verifyJWT, rewardInfo);

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "nodemon server.js"
+    "dev": "nodemon -e js,json,html,hbs server.js"
   },
   "keywords": [],
   "author": "",
@@ -13,10 +13,12 @@
   "type": "module",
   "dependencies": {
     "bcrypt": "^6.0.0",
+    "compression": "^1.8.2",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
+    "hbs": "^4.3.1",
     "jsonwebtoken": "^9.0.3",
     "lucide": "^1.33.0",
     "mongodb": "^7.5.0",
