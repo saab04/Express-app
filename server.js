@@ -15,8 +15,9 @@ export const __filename = fileURLToPath(import.meta.url);
 export const __dirname = path.dirname(__filename)
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+app.set("trust proxy", 1); 
 
+const PORT = process.env.PORT || 3000;
 mongoose.connect(process.env.MONGODB_URI).then(console.log("Connected to database sucessfully!"));
 
 app.use(cookieparser());
@@ -54,7 +55,7 @@ app.use("/dashboard", dashboardRouter);
 
 
 app.get("/", (req, res) => {
-    res.redirect("/auth");
+    res.redirect("/dashboard");
 })
 
 app.listen(PORT, () => {

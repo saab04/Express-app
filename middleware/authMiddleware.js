@@ -1,5 +1,4 @@
 import jwt from "jsonwebtoken";
-import cookieParser from "cookie-parser";
 
 const JWT_SECRET = process.env.JWT_SECRET;
 
@@ -8,7 +7,7 @@ export function verifyJWT(req, res, next) {
     const token = req.cookies.token;
 
     if (!token) {
-        return res.redirect("/auth");
+        return res.redirect("/auth/login");
     }
 
     try {
@@ -17,7 +16,7 @@ export function verifyJWT(req, res, next) {
         next();
     } catch (error) {
         res.clearCookie("token");
-        return res.redirect("/auth");
+        return res.redirect("/auth/login");
     }
 }
 

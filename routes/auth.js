@@ -1,7 +1,6 @@
 import express from "express";
 import { __filename, __dirname } from "../server.js";
 import { redirectIfLoggedIn } from "../middleware/authMiddleware.js";
-import path from "path"
 import { signUpUser, loginUser, logoutUser, checkAuthStatus } from "../controllers/authController.js";
 
 

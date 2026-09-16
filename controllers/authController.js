@@ -1,6 +1,4 @@
-import express from "express";
 import jwt from "jsonwebtoken";
-import cookieParser from "cookie-parser";
 import User from "../models/User.js";
 import bcrypt from "bcrypt";
 
@@ -29,7 +27,7 @@ export async function signUpUser(req, res) {
         res.cookie("token", token, {
             httpOnly: true,
             secure: process.env.NODE_ENV === "production",
-            sameSite: "strict",
+            sameSite: "lax",
             maxAge: 24 * 60 * 60 * 1000
         });
 
@@ -66,7 +64,7 @@ export async function loginUser(req, res) {
         res.cookie("token", token, {
             httpOnly: true,
             secure: process.env.NODE_ENV === "production",
-            sameSite: "strict",
+            sameSite: "lax",
             maxAge: 24 * 60 * 60 * 1000
         });
 
@@ -82,8 +80,8 @@ export function logoutUser(req, res) {
     res.cookie("token", "", {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
-        sameSite: "strict",
-        maxAge: 0 
+        sameSite: "lax",
+        maxAge: new Date(0)
     });
 
     return res.status(200).json({message: "Logged out successfully"});
