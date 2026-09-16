@@ -26,6 +26,11 @@ app.use(compression());
 
 app.set("view engine", "hbs");
 app.set("views", path.join(__dirname, "views"));
+
+if (process.env.NODE_ENV === "production") {
+  app.set("view cache", true);
+}
+
 hbs.registerPartials(path.join(__dirname, "views", "partials"));
 
 hbs.registerHelper("block", function(name, options) {
