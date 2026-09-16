@@ -1,8 +1,21 @@
 <header>
     {{#if user}}
-        <div id="name-display">
-            <i data-lucide="user" style="color:white"></i> 
-            <button type="button" id="logout">Log out</button>
+        <div id="nav-large">
+            <div>
+                <h2>My app</h2>
+            </div>
+            <div class="navbar">
+                <div class="name-display">
+                    <i data-lucide="user" style="color:white"></i> 
+                </div>
+                <ul>
+                    <li>lorem</li>
+                    <li>lorem</li>
+                    <li>lorem</li>
+                    <li><button type="button" class="logout">Log out</button></li>
+                </ul>
+            </div>
         </div>
+        {{> hamburger }}
     {{/if}}
 </header>
