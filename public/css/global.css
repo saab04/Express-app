@@ -83,6 +83,7 @@ button:active {
     scale: 0.97;
 }
 
+
 /* -------- partials -------- */
 
 /* login_form and signup_form */
@@ -161,8 +162,10 @@ header {
 }
 
 
-#nav-large > div > h2 {
+#nav-large > div > h2 > a {
     color: var(--white);
+    text-decoration: none;
+    cursor: pointer;
 }
 
 #nav-large > .navbar {
@@ -202,13 +205,14 @@ header {
     gap: 10px;
 }
 
-#nav-large > .navbar > ul > li {
+#nav-large > .navbar > ul > li > a {
     color: var(--white);
     cursor: pointer;
     transition: var(--transition-buttons);
+    text-decoration: none;
 }
 
-#nav-large > .navbar > ul > li:hover {
+#nav-large > .navbar > ul > li > a:hover {
     text-decoration: underline;
 }
 
@@ -309,8 +313,10 @@ header {
     transition: all 0.3s ease-in-out;
 }
 
-.hamburger-overlay > div > h2 {
+.hamburger-overlay > div > h2 > a{
     color: var(--white);
+    text-decoration: none;
+    cursor: pointer;
 }
 
 .hamburger-overlay > .navbar {
@@ -349,12 +355,13 @@ header {
     margin-top: 25px;
 }
 
-.hamburger-overlay > .navbar > ul > li {
+.hamburger-overlay > .navbar > ul > li > a {
     display: flex;
     justify-content: center;
     align-items: center;
     color: var(--white);
     cursor: pointer;
+    text-decoration: none;
 }
 
 .hamburger-overlay > .navbar > ul > li > button {
@@ -365,9 +372,6 @@ header {
     transition: var(--transition-buttons);
     margin-top: 30px;
 }
-
-
-
 
 #hamburger:checked ~ .hamburger-overlay{
     visibility: visible;
@@ -423,8 +427,236 @@ header {
     cursor: not-allowed;
 }
 
+/* big_coin */
+
+#coin{
+    position: relative;
+    width: 15rem;
+    height: 15rem;
+    margin: 2rem 0rem;
+    transform-style: preserve-3d;
+}
+
+#coin > div{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    backface-visibility: hidden;
+    background-size: contain;
+    position: absolute;
+}
+
+.heads{
+    background-image: linear-gradient(rgba(226, 181, 48, 0.5), rgba(226, 181, 48, 0.5));
+    background-position: center;
+    background-size: cover;
+    border: 1px solid black;
+    background-color: #ffbb01;
+}
+
+/* #E1B530 */
+
+.animate-heads{
+    animation: flipHeads 3s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes flipHeads {
+    from{
+        transform: rotateY(0deg);
+    }
+    to{
+        transform: rotateY(1800deg);
+    }
+}
+
+.tails{
+    background: yellow;
+    transform: rotateY(-180deg);
+}
+
+.animate-tails{
+    animation: flipTails 3s;
+    animation-fill-mode: forwards;
+}
+
+
+@keyframes flipTails {
+    from{
+        transform: rotateY(0deg);
+    }
+    to{
+        transform: rotateY(1620deg);
+    }
+}
+
+/* bet_control */
+
+.bet-control {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    width: 60dvw;
+    height: 130px;
+    background: var(--hf-color);
+    border-radius: var(--cards-br);
+    padding: 0 20px;
+}
+
+
+.bet-control > button {
+    position: relative;
+    width: 25%;
+    min-width: 100px;
+    height: 70%;
+    min-height: 90px;
+    border-radius: var(--cards-br);
+    font-size: 18px;
+}
+
+.bet-control button:disabled {
+    background: #e0e0e0; 
+    color: #a0a0a0;     
+    cursor: not-allowed;
+}
+
+.bet-control > button:active {
+    scale: 1 !important;
+}
+
+.bet-control > button > span {
+    position: absolute;
+    bottom: calc(100% + 25px);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 7px;
+    font-size: 20px;
+    border-radius: 5px;
+    pointer-events: none; 
+}
+
+.bet-control > button > span > span:first-child {
+    width: 20px;
+    height: 20px;
+    background: #ffbb01;
+    border-radius: 50%;
+    border: 0.5px solid var(--main-text-color);
+}
+
+.bet-control > button > span > span:not(:first-child) {
+    color: var(--main-text-color);
+}
+
+.bet-control > div {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: 50%;
+    height: 70%;
+}
+
+.bet-control > div > button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 50px;
+    height: 30px;
+    border-radius: var(--input-br);
+    margin: 20px;
+    font-size: 20px;
+}
+
+.bet-text{
+    position: absolute;
+    top: -10px;
+    color: var(--white);
+}
+
+.bet-control > div > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+    width: 150px;
+    height: 120%;
+    min-height: 40px;
+}
+
+.bet-control > div > div > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-width: 80px;
+    height: 32px;
+    background: var(--white);
+    border-radius: var(--cards-br);
+    margin-top: 40px;
+}
+
+.bet-control > div > div > div > p {
+    font-size: 18px;
+}
+
+.bet-control > div > div > button {
+    width: 100%;
+    min-width: 80px;
+    height: 32px;
+    border-radius: var(--cards-br);
+}
+
+@media(max-width:840px) {
+    .bet-control {
+        width: 70%;
+        flex-direction: column;
+        height: auto;
+        margin-bottom: 40px;
+        padding: 20px 0;
+        gap: 30px;
+    }
+
+    .bet-control > button {
+        width: 70%;
+    }
+
+    .bet-control > button > span {
+        bottom: 5px;
+        left: calc(90% - 10px);
+    }
+
+    .bet-control > div {
+        width: 60%;
+    }
+
+    .bet-control > div > button {
+        margin: 10px;
+    }
+
+    .bet-text, 
+    .bet-control > div > div{ 
+        min-width: 90px;
+    }
+}
+
+
+@media(max-width:390px) {
+    .bet-control {
+        width: 90%;
+    }
+}
+
 
 /* -------- views -------- */
+
+/* dashboard */
 
 #main-dashboard {
     display: flex;
@@ -446,6 +678,35 @@ header {
     }
 
 }
+
+/* coinflip */
+
+#main-coin_flip {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+#main-coin_flip > p {
+    height: 20px;
+}
+
+
+#flip {
+    width: 150px;
+    height: 50px;
+    border-radius: var(--cards-br);
+    font-size: 18px;
+}
+
+#flip:disabled {
+    background: #e0e0e0; 
+    color: #a0a0a0;     
+    cursor: not-allowed;
+}
+
 
 
 

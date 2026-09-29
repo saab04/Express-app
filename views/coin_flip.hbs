@@ -1,0 +1,72 @@
+<div id="main-coin_flip">
+    <p><span id="status"></span></p>
+    {{> big_coin }}
+    <button id="flip">Flip the Coin</button>
+    {{> bet_control }}
+</div>
+{{#block "scripts"}}
+    <script>
+        const coin = document.querySelector("#coin");
+        const button = document.querySelector("#flip");
+        const betControlButtons = document.querySelectorAll(".bet-control button");
+        const bets = document.querySelectorAll(".bet-control > button > span");
+        const status = document.querySelector("#status");
+
+        const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
+        function processResult(result) {
+            status.textContent = `${result}`;
+        }
+
+        async function flipCoin(){
+            button.disabled = true;
+            betControlButtons.forEach((button) => {
+                button.disabled = true;
+            })
+            coin.setAttribute("class", "");
+            try {
+                const response = await fetch("/dashboard/coin-flip", { 
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({name: "Alexander"})
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(data.message);
+                }
+
+                const { result } = data;
+
+                await delay(100);
+                coin.setAttribute("class", "animate-" + result);
+
+                await delay(2900);
+                processResult(result);
+
+                status.textContent = `${result}`;
+                await delay(3000); 
+
+                status.textContent = "";
+                button.disabled = false; 
+                betControlButtons.forEach((button, i) => {
+                    button.disabled = false;
+                    bets[i].replaceChildren();
+                });
+
+                
+            } catch (error) {
+                console.error("Error:", error);
+                button.disabled = false;
+                betControlButtons.forEach((button) => {
+                    button.disabled = false;
+                });
+            }
+        }
+
+        button.addEventListener("click", flipCoin);
+    </script>
+{{/block}}

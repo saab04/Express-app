@@ -1,4 +1,5 @@
 import User from "../models/User.js";
+import crypto from "crypto";
 
 export async function claimReward(req, res) {
     try {
@@ -58,4 +59,10 @@ export async function rewardInfo(req, res) {
         console.error(error);
         return res.status(500).json({message: "A problem with getting reward-info occured on the server"});
     }
+}
+
+export async function playCoinFlip(req, res) {
+    const randomB = crypto.randomBytes(1)[0];
+    const result = randomB < 128 ? "heads" : "tails";
+    res.json({ result: result })
 }

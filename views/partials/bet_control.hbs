@@ -1,0 +1,71 @@
+<div class="bet-control">
+    <button class="heads-button"><span></span>Heads</button>
+    <div>
+        <button><i data-lucide="minus"></i></button>
+        <div>
+            <p class="bet-text">BETS    MIN: 5  MAX:100</p>
+            <div><p>5</p></div>
+            <button class="clear-bet">Clear bets</button>
+        </div>
+        <button><i data-lucide="plus"></i></button>
+    </div>
+    <button class="tails-button"><span></span>Tails</button>
+</div>
+{{#block "scripts"}}
+    <script>
+        const betButtons = document.querySelectorAll(".bet-control > div > button");
+        const bet = document.querySelector(".bet-control > div > div > div > p");
+        const headsButton = document.querySelector(".heads-button");
+        const tailsButton = document.querySelector(".tails-button");
+        const clearBetsButton = document.querySelector(".clear-bet");
+        const spans = document.querySelectorAll(".bet-control > button > span");
+        let betN = Number(bet.textContent);
+
+        betButtons[0].addEventListener("click", () => {
+            if(betN >= 10) {
+                bet.textContent = `${betN -= 5}`;
+            }
+        });
+
+        betButtons[1].addEventListener("click", () => {
+            if(betN < 100) {
+                bet.textContent = `${betN += 5}`;
+            }
+        });
+
+        tailsButton.addEventListener("click", () => {
+            headsButton.disabled = true;
+            let tailsBet = spans[1].querySelector("span:last-child");
+            if (!tailsBet) {
+                const smallCoin = document.createElement("span");
+                tailsBet = document.createElement("span");
+                tailsBet.textContent = `${betN}`;
+                spans[1].prepend(tailsBet);
+                spans[1].prepend(smallCoin);
+            }
+            tailsBet.textContent = `${betN}`;
+        });
+
+        headsButton.addEventListener("click", () => {
+            tailsButton.disabled = true;
+            let headsBet = spans[0].querySelector("span:last-child");
+            if (!headsBet) {
+                const smallCoin = document.createElement("span");
+                headsBet = document.createElement("span");
+                headsBet.textContent = `${betN}`;
+                spans[0].prepend(headsBet);
+                spans[0].prepend(smallCoin);
+            }
+            headsBet.textContent = `${betN}`;
+        });
+
+        clearBetsButton.addEventListener("click", () => {
+            spans.forEach((e) => {
+                e.replaceChildren();
+            });
+            headsButton.disabled = false;
+            tailsButton.disabled = false;
+        });
+        
+    </script>
+{{/block}}
