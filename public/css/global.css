@@ -402,6 +402,17 @@ header {
     gap: 5px;
 }
 
+#balance-display > div > span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 15px;
+    aspect-ratio: 1 / 1;
+    background: #ffbb01;
+    border-radius: 50%;
+    border: 0.5px solid var(--hf-color);
+}
+
 #timer-con {
     flex-direction: column;
 }
@@ -577,6 +588,8 @@ header {
     position: absolute;
     top: -10px;
     color: var(--white);
+    width: 200px;
+    text-align: center;
 }
 
 .bet-control > div > div {
@@ -656,22 +669,22 @@ header {
 
 /* -------- views -------- */
 
-/* dashboard */
+/* account */
 
-#main-dashboard {
+#main-account {
     display: flex;
     flex-direction: column;
     justify-content: start;
 }
 
-#main-dashboard > div:first-child {
+#main-account > div:first-child {
     display: flex;
     justify-content: end;
     padding-top: 20px;
 }
 
 @media(max-width: 400px) {
-    #main-dashboard > div:first-child {
+    #main-account > div:first-child {
         display: flex;
         justify-content: center;
         padding-top: 20px;
@@ -689,10 +702,58 @@ header {
     gap: 20px;
 }
 
+.coins-display {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    gap: 5px;
+    min-width: 100px;
+    padding: 20px;
+}
+
+.coins-display > span {
+    height: 15px;
+    aspect-ratio: 1 / 1;
+    background: #ffbb01;
+    border-radius: 50%;
+    border: 0.5px solid var(--hf-color);
+}
+
 #main-coin_flip > p {
     height: 20px;
 }
 
+.flip-history {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 7px;
+    border-radius: var(--input-br);
+    min-width: 230px;
+    height: 40px;
+    background: var(--white);
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+.flip-history > span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 35px;
+    aspect-ratio: 1 / 1;
+    background: #ffbb01;
+    border-radius: 50%;
+    border: 0.5px solid var(--hf-color);
+}
 
 #flip {
     width: 150px;

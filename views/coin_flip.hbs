@@ -1,24 +1,73 @@
 <div id="main-coin_flip">
+    <div class="coins-display">
+        <span></span>
+        <p>Coins:</p>
+        <p></p>
+    </div>
     <p><span id="status"></span></p>
     {{> big_coin }}
+    <div class="flip-history"></div>
     <button id="flip">Flip the Coin</button>
     {{> bet_control }}
 </div>
 {{#block "scripts"}}
     <script>
+        const coinsDisplay = document.querySelector(".coins-display > p:last-child");
         const coin = document.querySelector("#coin");
         const button = document.querySelector("#flip");
+        const flipHistory = document.querySelector(".flip-history");
         const betControlButtons = document.querySelectorAll(".bet-control button");
         const bets = document.querySelectorAll(".bet-control > button > span");
         const status = document.querySelector("#status");
 
+        let history = JSON.parse(sessionStorage.getItem("Flip-history")) || [];
+
         const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
+        updateBalance();
+        updateHistory();
+
+        async function updateBalance() {
+            const data = await getRewardInfo(); // global
+            const { coins } = data;
+            coinsDisplay.textContent = coins;
+        }
+
+        function updateHistory() {
+            const historyList = history.map(res => {
+                const coin = document.createElement("span");
+                coin.textContent = res;
+                return coin;
+            });
+
+            flipHistory.replaceChildren(...historyList);
+        }
+
+        function addToHistory(res) {
+            history.push(res);
+            if (history.length > 5) {
+                history.shift();
+            }
+
+            sessionStorage.setItem("Flip-history", JSON.stringify(history));
+
+            updateHistory();
+        }
 
         function processResult(result) {
             status.textContent = `${result}`;
         }
 
         async function flipCoin(){
+            let betOn, bet, coinsTemp;
+            const betExist = document.querySelector(".bet-control > button > span > span");
+            if (betExist) {
+                betOn = betExist.parentElement.parentElement.lastChild.textContent;
+                bet = betExist.parentElement.lastChild.textContent;
+            } else {
+                console.error("No bets")
+                return;
+            }
             button.disabled = true;
             betControlButtons.forEach((button) => {
                 button.disabled = true;
@@ -30,7 +79,7 @@
                     headers: {
                         "Content-Type": "application/json"
                     },
-                    body: JSON.stringify({name: "Alexander"})
+                    body: JSON.stringify({betOn: betOn, bet: bet})
                 });
 
                 const data = await response.json();
@@ -41,8 +90,11 @@
 
                 const { result } = data;
 
+                coinsTemp = Number(coinsDisplay.textContent) - Number(bet);
+                coinsDisplay.textContent = `${coinsTemp}`;
+
                 await delay(100);
-                coin.setAttribute("class", "animate-" + result);
+                coin.setAttribute("class", "animate-" + result.toLowerCase());
 
                 await delay(2900);
                 processResult(result);
@@ -52,12 +104,19 @@
 
                 status.textContent = "";
                 button.disabled = false; 
-                betControlButtons.forEach((button, i) => {
+                betControlButtons.forEach((button) => {
                     button.disabled = false;
-                    bets[i].replaceChildren();
                 });
 
-                
+                bets.forEach((bet) => {
+                    bet.replaceChildren();
+                })
+
+                updateBalance();
+
+                addToHistory(result[0]);
+                flipHistory.lastChild.style.animation = "bounce 0.5s 1";
+
             } catch (error) {
                 console.error("Error:", error);
                 button.disabled = false;

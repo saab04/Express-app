@@ -5,7 +5,7 @@ const rewardButton = document.getElementById("reward-btn");
 let timerInterval = null;
 
 async function initRewardSystem() {
-    const data = await getRewardInfo();
+    const data = await getRewardInfo(); // global
 
     if (data) {
         balance.textContent = `${data.coins}`;
@@ -93,7 +93,7 @@ rewardButton.addEventListener("click", async e => {
 
         if (!contentDivs[1].querySelector(".countdown-text")) {
             const countdownText = document.createElement("p");
-            countdownText.classList.add("countdown-text"); // Viktigt för att matcha vid refresh!
+            countdownText.classList.add("countdown-text"); 
             countdownText.textContent = "Time until next award:";
             contentDivs[1].prepend(countdownText);
         }

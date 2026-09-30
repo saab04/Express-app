@@ -62,7 +62,34 @@ export async function rewardInfo(req, res) {
 }
 
 export async function playCoinFlip(req, res) {
-    const randomB = crypto.randomBytes(1)[0];
-    const result = randomB < 128 ? "heads" : "tails";
-    res.json({ result: result })
+    try {
+        const { betOn, bet } = req.body;
+
+        if(betOn !== "Heads" && betOn !== "Tails") {
+            return res.status(400).json({message: "You can only bet on Heads or Tails!"});
+        }
+
+        const betAmount = Number(bet);
+        if (isNaN(betAmount) || betAmount < 5 || betAmount > 100) { 
+            return res.status(400).json({ message: "Bet amount not allowed" }); 
+        } 
+
+        const randomB = crypto.randomBytes(1)[0];
+        const result = randomB < 128 ? "Heads" : "Tails";
+
+        const userId = req.user.userId;
+        const user = await User.findById(userId).select("-password");
+        user.coins -= betAmount;
+
+        if (betOn === result) {
+            user.coins += (betAmount * 2);
+        }
+
+        await user.save();
+
+        res.status(200).json({result: result});
+
+    } catch (error) {
+        return res.status(500).json({message: "A problem occured on the server"});
+    }
 }
